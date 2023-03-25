@@ -10,3 +10,7 @@ library(dplyr)
 library(ggplot2)
 
 tips%>%ggplot(aes(size)) + geom_histogram()
+tips%>%ggplot(aes(total_bill, tip)) + geom_point()
+
+tips%>%ggplot(aes(total_bill, tip)) + geom_point(aes(col=day))
+tips%>%ggplot(aes(total_bill, tip)) + geom_point(aes(col=day, pch=sex), size = 3)
