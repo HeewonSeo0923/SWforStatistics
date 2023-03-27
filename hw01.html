@@ -355,21 +355,10 @@ display: none;
 </div>
 
 
-<div id="join" class="section level1">
-<h1>join</h1>
+<div id="번-과제" class="section level1">
+<h1>1번 과제</h1>
 <pre class="r"><code>## make LL
-library(tidyverse)</code></pre>
-<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.0     ✔ readr     2.1.4
-## ✔ forcats   1.0.0     ✔ stringr   1.5.0
-## ✔ ggplot2   3.4.1     ✔ tibble    3.1.8
-## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-## ✔ purrr     1.0.1     
-## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-## ℹ Use the ]8;;http://conflicted.r-lib.org/conflicted package]8;; to force all conflicts to become errors</code></pre>
-<pre class="r"><code>LL &lt;- data.frame(
+LL &lt;- data.frame(
   sid = c(1, 2, 3, 4, 5),
   name = c(&#39;원반&#39;, &#39;이벙헌&#39;, &#39;이벙헌&#39;, &#39;한식구&#39;, &#39;헌빈&#39;),
   gnd = factor(c(&#39;M&#39;, &#39;M&#39;, &#39;F&#39;, &#39;M&#39;, &#39;M&#39;)))
@@ -394,14 +383,6 @@ merge(LL, RR, all=TRUE)</code></pre>
 ## 3   3 이벙헌   F   5
 ## 4   4 한식구   M  14
 ## 5   5   헌빈   M  NA</code></pre>
-<pre class="r"><code>LL %&gt;% left_join(RR)</code></pre>
-<pre><code>## Joining with `by = join_by(sid, name)`</code></pre>
-<pre><code>##   sid   name gnd scr
-## 1   1   원반   M  NA
-## 2   2 이벙헌   M  NA
-## 3   3 이벙헌   F   5
-## 4   4 한식구   M  14
-## 5   5   헌빈   M  NA</code></pre>
 <pre class="r"><code>## right join
 merge(LL, RR, all=TRUE)</code></pre>
 <pre><code>##   sid   name  gnd scr
@@ -416,23 +397,12 @@ merge(LL, RR, all=TRUE)</code></pre>
 ## 1   3 이벙헌    F   5
 ## 2   4 한식구    M  14
 ## 3   6 강호동 &lt;NA&gt;  15</code></pre>
-<pre class="r"><code>LL %&gt;% right_join(RR)</code></pre>
-<pre><code>## Joining with `by = join_by(sid, name)`</code></pre>
-<pre><code>##   sid   name  gnd scr
-## 1   3 이벙헌    F   5
-## 2   4 한식구    M  14
-## 3   6 강호동 &lt;NA&gt;  15</code></pre>
 <pre class="r"><code>## inner join
 merge(LL, RR)</code></pre>
 <pre><code>##   sid   name gnd scr
 ## 1   3 이벙헌   F   5
 ## 2   4 한식구   M  14</code></pre>
 <pre class="r"><code>merge(LL,RR, by=c(&#39;sid&#39;, &#39;name&#39;))</code></pre>
-<pre><code>##   sid   name gnd scr
-## 1   3 이벙헌   F   5
-## 2   4 한식구   M  14</code></pre>
-<pre class="r"><code>LL %&gt;% inner_join(RR)</code></pre>
-<pre><code>## Joining with `by = join_by(sid, name)`</code></pre>
 <pre><code>##   sid   name gnd scr
 ## 1   3 이벙헌   F   5
 ## 2   4 한식구   M  14</code></pre>
@@ -453,24 +423,8 @@ merge(LL, RR, all=TRUE)</code></pre>
 ## 4   4 한식구    M  14
 ## 5   5   헌빈    M  NA
 ## 6   6 강호동 &lt;NA&gt;  15</code></pre>
-<pre class="r"><code>LL %&gt;% full_join(RR)</code></pre>
-<pre><code>## Joining with `by = join_by(sid, name)`</code></pre>
-<pre><code>##   sid   name  gnd scr
-## 1   1   원반    M  NA
-## 2   2 이벙헌    M  NA
-## 3   3 이벙헌    F   5
-## 4   4 한식구    M  14
-## 5   5   헌빈    M  NA
-## 6   6 강호동 &lt;NA&gt;  15</code></pre>
 <pre class="r"><code>## left join - key : sid
 merge(LL, RR, by=c(&#39;sid&#39;), all.x = TRUE)</code></pre>
-<pre><code>##   sid name.x gnd name.y scr
-## 1   1   원반   M   &lt;NA&gt;  NA
-## 2   2 이벙헌   M   &lt;NA&gt;  NA
-## 3   3 이벙헌   F 이벙헌   5
-## 4   4 한식구   M 한식구  14
-## 5   5   헌빈   M   &lt;NA&gt;  NA</code></pre>
-<pre class="r"><code>LL %&gt;% left_join(RR, by = &#39;sid&#39;)</code></pre>
 <pre><code>##   sid name.x gnd name.y scr
 ## 1   1   원반   M   &lt;NA&gt;  NA
 ## 2   2 이벙헌   M   &lt;NA&gt;  NA
@@ -483,17 +437,8 @@ merge(LL, RR, by=c(&#39;sid&#39;), all.y = TRUE)</code></pre>
 ## 1   3 이벙헌    F 이벙헌   5
 ## 2   4 한식구    M 한식구  14
 ## 3   6   &lt;NA&gt; &lt;NA&gt; 강호동  15</code></pre>
-<pre class="r"><code>LL %&gt;% right_join(RR, by = &#39;sid&#39;)</code></pre>
-<pre><code>##   sid name.x  gnd name.y scr
-## 1   3 이벙헌    F 이벙헌   5
-## 2   4 한식구    M 한식구  14
-## 3   6   &lt;NA&gt; &lt;NA&gt; 강호동  15</code></pre>
 <pre class="r"><code>## inner join - key : sid
 merge(LL,RR, by=c(&#39;sid&#39;))</code></pre>
-<pre><code>##   sid name.x gnd name.y scr
-## 1   3 이벙헌   F 이벙헌   5
-## 2   4 한식구   M 한식구  14</code></pre>
-<pre class="r"><code>LL %&gt;% inner_join(RR, by = &#39;sid&#39;)</code></pre>
 <pre><code>##   sid name.x gnd name.y scr
 ## 1   3 이벙헌   F 이벙헌   5
 ## 2   4 한식구   M 한식구  14</code></pre>
@@ -506,24 +451,17 @@ merge(LL, RR, by=c(&#39;sid&#39;), all = TRUE)</code></pre>
 ## 4   4 한식구    M 한식구  14
 ## 5   5   헌빈    M   &lt;NA&gt;  NA
 ## 6   6   &lt;NA&gt; &lt;NA&gt; 강호동  15</code></pre>
-<pre class="r"><code>LL %&gt;% full_join(RR, by = &#39;sid&#39;)</code></pre>
-<pre><code>##   sid name.x  gnd name.y scr
-## 1   1   원반    M   &lt;NA&gt;  NA
-## 2   2 이벙헌    M   &lt;NA&gt;  NA
-## 3   3 이벙헌    F 이벙헌   5
-## 4   4 한식구    M 한식구  14
-## 5   5   헌빈    M   &lt;NA&gt;  NA
-## 6   6   &lt;NA&gt; &lt;NA&gt; 강호동  15</code></pre>
 </div>
-<div id="matrix-operation" class="section level1">
-<h1>matrix operation</h1>
-<pre class="r"><code>bld &lt;- c(&#39;B&#39;,&#39;AB&#39;,&#39;O&#39;)
-factor(bld)</code></pre>
-<pre><code>## [1] B  AB O 
-## Levels: AB B O</code></pre>
-<pre class="r"><code>factor(bld, levels=c(&#39;A&#39;,&#39;B&#39;,&#39;AB&#39;,&#39;O&#39;))</code></pre>
+<div id="번-과제-1" class="section level1">
+<h1>2번 과제</h1>
+<pre class="r"><code>## make factor
+bld &lt;- c(&#39;B&#39;,&#39;AB&#39;,&#39;O&#39;)
+factor(bld, levels=c(&#39;A&#39;,&#39;B&#39;,&#39;AB&#39;,&#39;O&#39;))</code></pre>
 <pre><code>## [1] B  AB O 
 ## Levels: A B AB O</code></pre>
+<pre class="r"><code>factor(bld)</code></pre>
+<pre><code>## [1] B  AB O 
+## Levels: AB B O</code></pre>
 <pre class="r"><code>levels(bld) </code></pre>
 <pre><code>## NULL</code></pre>
 <pre class="r"><code>nlevels(bld) </code></pre>
@@ -531,10 +469,7 @@ factor(bld)</code></pre>
 <pre class="r"><code>ordered(bld) </code></pre>
 <pre><code>## [1] B  AB O 
 ## Levels: AB &lt; B &lt; O</code></pre>
-<pre class="r"><code># relevel(bld,&#39;O&#39;)
-### tv::recode_factor() plyr::revalue() plyr::mapvalues()
-
-## make Vector
+<pre class="r"><code>## make Vector
 b &lt;-c(1,1,1)
 length(b)</code></pre>
 <pre><code>## [1] 3</code></pre>
@@ -608,8 +543,18 @@ sum(diag(C))</code></pre>
 <pre class="r"><code>det(C)</code></pre>
 <pre><code>## [1] 3</code></pre>
 <pre class="r"><code>invC &lt;- solve(C)
-
-## mathmatics
+invC</code></pre>
+<pre><code>##          [,1]       [,2]       [,3]
+## c1  0.3333333  0.3333333  0.3333333
+## c2  0.6666667 -0.3333333 -0.3333333
+## c3 -0.3333333  0.6666667 -0.3333333</code></pre>
+<pre class="r"><code># 항등행렬 확인하기
+round(invC %*% C, 4)</code></pre>
+<pre><code>##    c1 c2 c3
+## c1  1  0  0
+## c2  0  1  0
+## c3  0  0  1</code></pre>
+<pre class="r"><code>## mathmatics
 A %*% C</code></pre>
 <pre><code>##      c1 c2 c3
 ## [1,]  4 -2 -3
@@ -630,9 +575,43 @@ D &lt;- diag(diag(C))
 d &lt;- diag(C)
 
 ## solving equation
-x &lt;- solve(C,b)
+solve(C,b)</code></pre>
+<pre><code>## c1 c2 c3 
+##  1  0  0</code></pre>
+<pre class="r"><code>invC%*%b</code></pre>
+<pre><code>##             [,1]
+## c1  1.000000e+00
+## c2 -5.551115e-17
+## c3  0.000000e+00</code></pre>
+</div>
+<div id="번-과제-2" class="section level1">
+<h1>3번 과제</h1>
+<pre class="r"><code>X &lt;- matrix(c(1, 1, 1, 2, 1, 0), nr = 3, byrow = TRUE) # 계수행렬 (식 3개 미지수 2개)
 
-x &lt;- invC%*%b</code></pre>
+y&lt;- matrix(c(1, 2, 3), nr = 3, byrow= TRUE)
+
+
+XTX &lt;- t(X) %*% X
+XTX</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]    3    3
+## [2,]    3    5</code></pre>
+<pre class="r"><code>XTy &lt;- t(X) %*% y
+XTy</code></pre>
+<pre><code>##      [,1]
+## [1,]    6
+## [2,]    5</code></pre>
+<pre class="r"><code>solve(XTX, XTy)</code></pre>
+<pre><code>##      [,1]
+## [1,]  2.5
+## [2,] -0.5</code></pre>
+<pre class="r"><code>det(XTX)</code></pre>
+<pre><code>## [1] 6</code></pre>
+<pre class="r"><code>InvXTX &lt;- solve(XTX)
+InvXTX</code></pre>
+<pre><code>##            [,1] [,2]
+## [1,]  0.8333333 -0.5
+## [2,] -0.5000000  0.5</code></pre>
 </div>
 
 

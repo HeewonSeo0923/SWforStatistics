@@ -1,5 +1,4 @@
-library(tidyverse)
-# Join
+# 과제 1번 - Join
 ## make LL
 LL <- data.frame(
   sid = c(1, 2, 3, 4, 5),
@@ -12,50 +11,42 @@ RR <- read.csv('RR.csv')
 ## left join
 merge(LL, RR, all=TRUE)
 merge(LL, RR, by=c('sid', 'name'), all.x = TRUE)
-LL %>% left_join(RR)
 
 ## right join
 merge(LL, RR, all=TRUE)
 merge(LL, RR, by=c('sid', 'name'), all.y = TRUE)
-LL %>% right_join(RR)
 
 ## inner join
 merge(LL, RR)
 merge(LL,RR, by=c('sid', 'name'))
-LL %>% inner_join(RR)
 
 ## full join
 merge(LL, RR, all=TRUE)
 merge(LL, RR, by=c('sid', 'name'), all = TRUE)
-LL %>% full_join(RR)
 
 ## left join - key : sid
 merge(LL, RR, by=c('sid'), all.x = TRUE)
-LL %>% left_join(RR, by = 'sid')
 
 ## right join - key : sid
 merge(LL, RR, by=c('sid'), all.y = TRUE)
-LL %>% right_join(RR, by = 'sid')
 
 ## inner join - key : sid
 merge(LL,RR, by=c('sid'))
-LL %>% inner_join(RR, by = 'sid')
 
 ## full join - key : sid
 merge(LL, RR, by=c('sid'), all = TRUE)
-LL %>% full_join(RR, by = 'sid')
 
-# matrix operation
+
+
+# 과제 2번 - matrix operation
 ## make factor
 bld <- c('B','AB','O')
-factor(bld)
 factor(bld, levels=c('A','B','AB','O'))
+factor(bld)
 
 levels(bld) 
 nlevels(bld) 
 ordered(bld) 
-# relevel(bld,'O')
-### tv::recode_factor() plyr::revalue() plyr::mapvalues()
 
 ## make Vector
 b <-c(1,1,1)
@@ -91,7 +82,6 @@ t(B)
 B[, c(1,3)]
 B[, 1]
 B[,1,drop=F]
-
 ## make matrix
 c1 <- rep(1,3)
 c2 <- c(1,0,-1)
@@ -100,6 +90,10 @@ C <- cbind(c1,c2,c3)
 sum(diag(C))
 det(C)
 invC <- solve(C)
+invC
+
+# 항등행렬 확인하기
+round(invC %*% C, 4)
 
 ## mathmatics
 A %*% C
@@ -113,10 +107,26 @@ D <- diag(diag(C))
 d <- diag(C)
 
 ## solving equation
-x <- solve(C,b)
+solve(C,b)
 
-x <- invC%*%b
+invC%*%b
 
-# Linear Regression
-x <- matrix(c(1, 1, 1, 2, 1, 0), nr = 3, byrow = TRUE)
-y <- matrix(c(1, 2, 3), nr = 3, byrow= TRUE)
+
+# 과제 3번 - Linear Regression
+X <- matrix(c(1, 1, 1, 2, 1, 0), nr = 3, byrow = TRUE) # 계수행렬 (식 3개 미지수 2개)
+
+y<- matrix(c(1, 2, 3), nr = 3, byrow= TRUE)
+
+
+XTX <- t(X) %*% X
+XTX
+
+XTy <- t(X) %*% y
+XTy
+
+solve(XTX, XTy)
+
+det(XTX)
+
+InvXTX <- solve(XTX)
+InvXTX
