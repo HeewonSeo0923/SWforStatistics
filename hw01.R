@@ -113,20 +113,64 @@ invC%*%b
 
 
 # 과제 3번 - Linear Regression
+## 01
 X <- matrix(c(1, 1, 1, 2, 1, 0), nr = 3, byrow = TRUE) # 계수행렬 (식 3개 미지수 2개)
 
+## 02
 y<- matrix(c(1, 2, 3), nr = 3, byrow= TRUE)
 
-
+## 03
 XTX <- t(X) %*% X
 XTX
 
 XTy <- t(X) %*% y
 XTy
 
-solve(XTX, XTy)
-
+## 04
 det(XTX)
 
 InvXTX <- solve(XTX)
 InvXTX
+
+b <-InvXTX%*%XTy
+b
+
+## 05
+solve(XTX, XTy)
+
+## 06
+hatmat <- X %*% InvXTX %*% t(X)
+hatmat
+
+hatmat%*%hatmat
+
+trH <- sum(diag(hatmat))
+trH
+
+det(hatmat)
+
+## 07
+yhat <- hatmat%*% y
+yhat
+
+yhat2 <- X %*% b
+yhat2
+
+## 08
+res <- y - yhat
+res
+
+sse <- t(res) %*% res
+sse
+
+## 10 
+x <- c(1, 2, 0)
+y <- c(1, 2, 3)
+m <- lm(y~x)
+coef(m)
+predict(m)
+residuals(m)
+summary(m)
+anova(m)
+plot(x,y)
+abline(a = coef(m)[1], b = coef(m)[2])
